@@ -11,237 +11,118 @@
 <style>
 
 *{
-    box-sizing:border-box;
     margin:0;
     padding:0;
+    box-sizing:border-box;
 }
 
 body{
     font-family:'Oswald', sans-serif;
-    background:
-        linear-gradient(rgba(0,0,0,0.82), rgba(0,0,0,0.82)),
-        url('https://images.unsplash.com/photo-1516280440614-37939bbacd81?q=80&w=1600&auto=format&fit=crop');
-    background-size:cover;
-    background-position:center;
-    background-attachment:fixed;
+    background:black;
     color:white;
     min-height:100vh;
 }
 
-/* HEADER */
-
 header{
     background:linear-gradient(90deg,#7f1d1d,#b91c1c,#7f1d1d);
     border-bottom:4px solid gold;
-    padding:25px 15px;
+    padding:25px;
     text-align:center;
-    box-shadow:0 4px 15px rgba(0,0,0,0.5);
 }
 
 header h1{
     font-size:3rem;
-    letter-spacing:2px;
-    text-transform:uppercase;
 }
 
 header p{
-    margin-top:8px;
-    font-size:1rem;
-    color:#facc15;
-    letter-spacing:1px;
+    color:gold;
+    margin-top:5px;
 }
-
-/* CONTAINER */
 
 .container{
     max-width:1200px;
     margin:auto;
-    padding:25px 15px;
+    padding:20px;
 }
-
-/* BOX */
 
 .box{
-    background:rgba(17,24,39,0.92);
-    border:2px solid rgba(255,255,255,0.08);
-    border-radius:18px;
-    padding:25px;
-    margin-bottom:25px;
-    backdrop-filter:blur(6px);
-    box-shadow:0 10px 25px rgba(0,0,0,0.4);
+    background:#111827;
+    border:1px solid #374151;
+    border-radius:16px;
+    padding:20px;
+    margin-bottom:20px;
 }
-
-/* TITLES */
 
 .section-title{
-    font-size:1.8rem;
-    margin-bottom:18px;
-    color:#facc15;
-    text-transform:uppercase;
-    letter-spacing:1px;
+    color:gold;
+    margin-bottom:15px;
 }
-
-/* INPUTS */
 
 input,
 button{
     width:100%;
     padding:14px;
     border:none;
-    border-radius:12px;
-    font-size:1rem;
+    border-radius:10px;
     margin-top:12px;
+    font-size:1rem;
 }
 
 input{
-    background:#f3f4f6;
-    color:black;
-    font-family:Arial, sans-serif;
+    background:white;
 }
-
-input:focus{
-    outline:3px solid gold;
-}
-
-/* BUTTONS */
 
 button{
-    background:linear-gradient(90deg,#facc15,#fde047);
+    background:gold;
     color:black;
-    font-weight:700;
+    font-weight:bold;
     cursor:pointer;
-    transition:0.25s;
-    text-transform:uppercase;
-    letter-spacing:1px;
 }
 
-button:hover{
-    transform:translateY(-2px);
-    box-shadow:0 5px 15px rgba(250,204,21,0.3);
+.grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
 }
 
-/* LOGIN */
-
-#errorMessage{
-    color:#f87171;
+.uniform-card{
+    background:#7f1d1d;
+    border-left:5px solid gold;
+    border-radius:12px;
+    padding:20px;
     margin-top:15px;
-    font-size:1rem;
 }
 
-/* MAIN */
+.mini-box{
+    background:rgba(0,0,0,0.2);
+    padding:10px;
+    border-radius:10px;
+    margin-top:10px;
+}
+
+.delete-btn{
+    background:#dc2626;
+    color:white;
+    margin-top:15px;
+}
 
 #mainContent{
     display:none;
 }
 
-/* GRID */
-
-.grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:18px;
+#errorMessage{
+    color:#f87171;
     margin-top:10px;
 }
 
-/* CARDS */
-
-.uniform-card{
-    background:linear-gradient(145deg,#991b1b,#7f1d1d);
-    border:2px solid rgba(255,255,255,0.08);
-    border-left:6px solid gold;
-    border-radius:16px;
-    padding:20px;
-    margin-top:18px;
-    transition:0.25s;
-}
-
-.uniform-card:hover{
-    transform:translateY(-3px);
-    box-shadow:0 8px 20px rgba(0,0,0,0.4);
-}
-
-.uniform-card h3{
-    font-size:1.7rem;
-    margin-bottom:10px;
-    color:#fde68a;
-}
-
-/* MINI BOX */
-
-.mini-box{
-    background:rgba(0,0,0,0.22);
-    padding:14px;
-    border-radius:12px;
-    margin-top:12px;
-}
-
-.mini-box strong{
-    color:#facc15;
-}
-
-/* DELETE BUTTON */
-
-.delete-btn{
-    background:linear-gradient(90deg,#dc2626,#ef4444);
-    color:white;
-    margin-top:18px;
-}
-
-.delete-btn:hover{
-    box-shadow:0 5px 15px rgba(239,68,68,0.3);
-}
-
-/* SEARCH */
-
-.search-bar{
-    margin-bottom:10px;
-}
-
-/* FOOTER */
-
-footer{
-    text-align:center;
-    padding:20px;
-    color:#d1d5db;
-    font-size:0.9rem;
-}
-
-/* MOBILE */
-
 @media(max-width:768px){
-
-    header h1{
-        font-size:2rem;
-    }
 
     .grid{
         grid-template-columns:1fr;
     }
 
-    .box{
-        padding:18px;
-    }
-
-    .uniform-card h3{
-        font-size:1.4rem;
-    }
-
-}
-
-@media(max-width:480px){
-
     header h1{
-        font-size:1.6rem;
-    }
-
-    header p{
-        font-size:0.85rem;
-    }
-
-    input,
-    button{
-        font-size:0.95rem;
-        padding:12px;
+        font-size:2rem;
     }
 
 }
@@ -265,31 +146,28 @@ footer{
 
 <div class="container">
 
-    <!-- LOGIN -->
     <div class="box" id="loginBox">
 
         <h2 class="section-title">
-            Quartermaster Login
+            Access System
         </h2>
 
         <input
             type="password"
-            id="passwordInput"
+            id="password"
             placeholder="Enter Password"
         >
 
         <button onclick="login()">
-            Access System
+            Enter
         </button>
 
         <p id="errorMessage"></p>
 
     </div>
 
-    <!-- WEBSITE -->
     <div id="mainContent">
 
-        <!-- ADD UNIFORM -->
         <div class="box">
 
             <h2 class="section-title">
@@ -317,7 +195,6 @@ footer{
                     <input
                         type="text"
                         id="jacketNumber"
-                        placeholder="Enter Jacket #"
                     >
 
                 </div>
@@ -329,7 +206,6 @@ footer{
                     <input
                         type="text"
                         id="bibberNumber"
-                        placeholder="Enter Bibber #"
                     >
 
                 </div>
@@ -342,7 +218,6 @@ footer{
 
         </div>
 
-        <!-- SEARCH -->
         <div class="box">
 
             <h2 class="section-title">
@@ -352,8 +227,7 @@ footer{
             <input
                 type="text"
                 id="searchInput"
-                class="search-bar"
-                placeholder="Search by student name or number..."
+                placeholder="Search uniforms..."
                 onkeyup="searchUniforms()"
             >
 
@@ -365,29 +239,69 @@ footer{
 
 </div>
 
-<footer>
-    Crestview High School • Big Red Machine • Digital Quartermaster
-</footer>
+<script type="module">
 
-<script>
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
-// PASSWORD
+import {
+    getFirestore,
+    collection,
+    addDoc,
+    onSnapshot,
+    deleteDoc,
+    doc
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+/* FIREBASE CONFIG */
+
+const firebaseConfig = {
+
+    apiKey: "AIzaSyDXPx1utN8wgGoitpzFwQJXwI5Ik701nU0",
+
+    authDomain: "crestview-quartermaster.firebaseapp.com",
+
+    projectId: "crestview-quartermaster",
+
+    storageBucket: "crestview-quartermaster.firebasestorage.app",
+
+    messagingSenderId: "24753654676",
+
+    appId: "1:24753654676:web:e2e5972798660d12505d81"
+
+};
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+const uniformsCollection =
+    collection(db, "uniforms");
+
+/* WEBSITE PASSWORD */
+
 const websitePassword = "bigredmachine";
 
-// STORAGE
-let uniforms = [];
+/* LOGIN */
 
-// LOGIN
-function login(){
+window.login = function(){
 
     const enteredPassword =
-        document.getElementById("passwordInput").value;
+        document.getElementById("password").value;
 
     if(enteredPassword === websitePassword){
 
-        document.getElementById("loginBox").style.display = "none";
+        document.getElementById("loginBox")
+            .style.display = "none";
 
-        document.getElementById("mainContent").style.display = "block";
+        document.getElementById("mainContent")
+            .style.display = "block";
+
+        localStorage.setItem(
+            "quartermasterAccess",
+            "granted"
+        );
 
     } else {
 
@@ -398,58 +312,79 @@ function login(){
 
 }
 
-// ADD UNIFORM
-function addUniform(){
+/* AUTO LOGIN */
+
+if(localStorage.getItem("quartermasterAccess") === "granted"){
+
+    document.getElementById("loginBox")
+        .style.display = "none";
+
+    document.getElementById("mainContent")
+        .style.display = "block";
+
+}
+
+/* ADD UNIFORM */
+
+window.addUniform = async function(){
 
     const name =
-        document.getElementById("uniformName").value.trim();
+        document.getElementById("uniformName").value;
 
     const uniformNumber =
-        document.getElementById("uniformNumber").value.trim();
+        document.getElementById("uniformNumber").value;
 
     const jacketNumber =
-        document.getElementById("jacketNumber").value.trim();
+        document.getElementById("jacketNumber").value;
 
     const bibberNumber =
-        document.getElementById("bibberNumber").value.trim();
+        document.getElementById("bibberNumber").value;
 
     if(name === "" || uniformNumber === ""){
 
-        alert("Please complete all required fields.");
+        alert("Fill in required fields.");
 
         return;
 
     }
 
-    const uniform = {
-
-        id: Date.now(),
+    await addDoc(uniformsCollection, {
 
         name,
-
         uniformNumber,
-
         jacketNumber,
-
         bibberNumber
 
-    };
-
-    uniforms.push(uniform);
-
-    saveUniforms();
-
-    renderUniforms(uniforms);
-
-    // CLEAR INPUTS
-    document.getElementById("uniformName").value = "";
-    document.getElementById("uniformNumber").value = "";
-    document.getElementById("jacketNumber").value = "";
-    document.getElementById("bibberNumber").value = "";
+    });
 
 }
 
-// RENDER
+/* LIVE DATABASE */
+
+let allUniforms = [];
+
+onSnapshot(uniformsCollection, snapshot => {
+
+    allUniforms = [];
+
+    snapshot.forEach(docItem => {
+
+        allUniforms.push({
+
+            id: docItem.id,
+
+            ...docItem.data()
+
+        });
+
+    });
+
+    renderUniforms(allUniforms);
+
+});
+
+/* RENDER */
+
 function renderUniforms(data){
 
     const container =
@@ -457,23 +392,11 @@ function renderUniforms(data){
 
     container.innerHTML = "";
 
-    if(data.length === 0){
-
-        container.innerHTML =
-            "<p>No uniforms found.</p>";
-
-        return;
-
-    }
-
     data.forEach(uniform => {
 
-        const card =
-            document.createElement("div");
+        container.innerHTML += `
 
-        card.classList.add("uniform-card");
-
-        card.innerHTML = `
+        <div class="uniform-card">
 
             <h3>${uniform.name}</h3>
 
@@ -504,90 +427,57 @@ function renderUniforms(data){
 
             <button
                 class="delete-btn"
-                onclick="deleteUniform(${uniform.id})"
+                onclick="deleteUniform('${uniform.id}')"
             >
                 Delete Uniform
             </button>
 
-        `;
+        </div>
 
-        container.appendChild(card);
+        `;
 
     });
 
 }
 
-// SEARCH
-function searchUniforms(){
+/* SEARCH */
 
-    const searchValue =
+window.searchUniforms = function(){
+
+    const value =
         document.getElementById("searchInput")
         .value
         .toLowerCase();
 
-    const filteredUniforms = uniforms.filter(uniform =>
+    const filtered = allUniforms.filter(uniform =>
 
-        uniform.name.toLowerCase().includes(searchValue)
-
-        ||
-
-        uniform.uniformNumber.toLowerCase().includes(searchValue)
+        uniform.name.toLowerCase().includes(value)
 
         ||
 
-        uniform.jacketNumber.toLowerCase().includes(searchValue)
+        uniform.uniformNumber.toLowerCase().includes(value)
 
         ||
 
-        uniform.bibberNumber.toLowerCase().includes(searchValue)
+        uniform.jacketNumber.toLowerCase().includes(value)
+
+        ||
+
+        uniform.bibberNumber.toLowerCase().includes(value)
 
     );
 
-    renderUniforms(filteredUniforms);
+    renderUniforms(filtered);
 
 }
 
-// DELETE
-function deleteUniform(id){
+/* DELETE */
 
-    uniforms = uniforms.filter(
-        uniform => uniform.id !== id
-    );
+window.deleteUniform = async function(id){
 
-    saveUniforms();
-
-    renderUniforms(uniforms);
+    await deleteDoc(doc(db, "uniforms", id));
 
 }
-
-// SAVE
-function saveUniforms(){
-
-    localStorage.setItem(
-        "crestviewUniforms",
-        JSON.stringify(uniforms)
-    );
-
-}
-
-// LOAD
-function loadUniforms(){
-
-    const savedUniforms =
-        localStorage.getItem("crestviewUniforms");
-
-    if(savedUniforms){
-
-        uniforms = JSON.parse(savedUniforms);
-
-        renderUniforms(uniforms);
-
-    }
-
-}
-
-// INITIAL LOAD
-loadUniforms();
 
 </script>
 
