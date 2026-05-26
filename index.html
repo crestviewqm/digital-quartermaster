@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Crestview Big Red Machine Quartermaster</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:'Oswald', sans-serif;
+    background:
+        linear-gradient(rgba(0,0,0,0.82), rgba(0,0,0,0.82)),
+        url('https://images.unsplash.com/photo-1516280440614-37939bbacd81?q=80&w=1600&auto=format&fit=crop');
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+    color:white;
+    min-height:100vh;
+}
+
+/* HEADER */
+
+header{
+    background:linear-gradient(90deg,#7f1d1d,#b91c1c,#7f1d1d);
+    border-bottom:4px solid gold;
+    padding:25px 15px;
+    text-align:center;
+    box-shadow:0 4px 15px rgba(0,0,0,0.5);
+}
+
+header h1{
+    font-size:3rem;
+    letter-spacing:2px;
+    text-transform:uppercase;
+}
+
+header p{
+    margin-top:8px;
+    font-size:1rem;
+    color:#facc15;
+    letter-spacing:1px;
+}
+
+/* CONTAINER */
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:25px 15px;
+}
+
+/* BOX */
+
+.box{
+    background:rgba(17,24,39,0.92);
+    border:2px solid rgba(255,255,255,0.08);
+    border-radius:18px;
+    padding:25px;
+    margin-bottom:25px;
+    backdrop-filter:blur(6px);
+    box-shadow:0 10px 25px rgba(0,0,0,0.4);
+}
+
+/* TITLES */
+
+.section-title{
+    font-size:1.8rem;
+    margin-bottom:18px;
+    color:#facc15;
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+/* INPUTS */
+
+input,
+button{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:12px;
+    font-size:1rem;
+    margin-top:12px;
+}
+
+input{
+    background:#f3f4f6;
+    color:black;
+    font-family:Arial, sans-serif;
+}
+
+input:focus{
+    outline:3px solid gold;
+}
+
+/* BUTTONS */
+
+button{
+    background:linear-gradient(90deg,#facc15,#fde047);
+    color:black;
+    font-weight:700;
+    cursor:pointer;
+    transition:0.25s;
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+button:hover{
+    transform:translateY(-2px);
+    box-shadow:0 5px 15px rgba(250,204,21,0.3);
+}
+
+/* LOGIN */
+
+#errorMessage{
+    color:#f87171;
+    margin-top:15px;
+    font-size:1rem;
+}
+
+/* MAIN */
+
+#mainContent{
+    display:none;
+}
+
+/* GRID */
+
+.grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+    margin-top:10px;
+}
+
+/* CARDS */
+
+.uniform-card{
+    background:linear-gradient(145deg,#991b1b,#7f1d1d);
+    border:2px solid rgba(255,255,255,0.08);
+    border-left:6px solid gold;
+    border-radius:16px;
+    padding:20px;
+    margin-top:18px;
+    transition:0.25s;
+}
+
+.uniform-card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 8px 20px rgba(0,0,0,0.4);
+}
+
+.uniform-card h3{
+    font-size:1.7rem;
+    margin-bottom:10px;
+    color:#fde68a;
+}
+
+/* MINI BOX */
+
+.mini-box{
+    background:rgba(0,0,0,0.22);
+    padding:14px;
+    border-radius:12px;
+    margin-top:12px;
+}
+
+.mini-box strong{
+    color:#facc15;
+}
+
+/* DELETE BUTTON */
+
+.delete-btn{
+    background:linear-gradient(90deg,#dc2626,#ef4444);
+    color:white;
+    margin-top:18px;
+}
+
+.delete-btn:hover{
+    box-shadow:0 5px 15px rgba(239,68,68,0.3);
+}
+
+/* SEARCH */
+
+.search-bar{
+    margin-bottom:10px;
+}
+
+/* FOOTER */
+
+footer{
+    text-align:center;
+    padding:20px;
+    color:#d1d5db;
+    font-size:0.9rem;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+    header h1{
+        font-size:2rem;
+    }
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    .box{
+        padding:18px;
+    }
+
+    .uniform-card h3{
+        font-size:1.4rem;
+    }
+
+}
+
+@media(max-width:480px){
+
+    header h1{
+        font-size:1.6rem;
+    }
+
+    header p{
+        font-size:0.85rem;
+    }
+
+    input,
+    button{
+        font-size:0.95rem;
+        padding:12px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+    <h1>
+        Crestview Big Red Machine
+    </h1>
+
+    <p>
+        Digital Quartermaster System
+    </p>
+
+</header>
+
+<div class="container">
+
+    <!-- LOGIN -->
+    <div class="box" id="loginBox">
+
+        <h2 class="section-title">
+            Quartermaster Login
+        </h2>
+
+        <input
+            type="password"
+            id="passwordInput"
+            placeholder="Enter Password"
+        >
+
+        <button onclick="login()">
+            Access System
+        </button>
+
+        <p id="errorMessage"></p>
+
+    </div>
+
+    <!-- WEBSITE -->
+    <div id="mainContent">
+
+        <!-- ADD UNIFORM -->
+        <div class="box">
+
+            <h2 class="section-title">
+                Add Uniform
+            </h2>
+
+            <input
+                type="text"
+                id="uniformName"
+                placeholder="Student Name"
+            >
+
+            <input
+                type="text"
+                id="uniformNumber"
+                placeholder="Uniform Number"
+            >
+
+            <div class="grid">
+
+                <div class="mini-box">
+
+                    <strong>Jacket Number</strong>
+
+                    <input
+                        type="text"
+                        id="jacketNumber"
+                        placeholder="Enter Jacket #"
+                    >
+
+                </div>
+
+                <div class="mini-box">
+
+                    <strong>Bibber Number</strong>
+
+                    <input
+                        type="text"
+                        id="bibberNumber"
+                        placeholder="Enter Bibber #"
+                    >
+
+                </div>
+
+            </div>
+
+            <button onclick="addUniform()">
+                Add Uniform
+            </button>
+
+        </div>
+
+        <!-- SEARCH -->
+        <div class="box">
+
+            <h2 class="section-title">
+                Search Uniforms
+            </h2>
+
+            <input
+                type="text"
+                id="searchInput"
+                class="search-bar"
+                placeholder="Search by student name or number..."
+                onkeyup="searchUniforms()"
+            >
+
+            <div id="uniformContainer"></div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<footer>
+    Crestview High School • Big Red Machine • Digital Quartermaster
+</footer>
+
+<script>
+
+// PASSWORD
+const websitePassword = "bigredmachine";
+
+// STORAGE
+let uniforms = [];
+
+// LOGIN
+function login(){
+
+    const enteredPassword =
+        document.getElementById("passwordInput").value;
+
+    if(enteredPassword === websitePassword){
+
+        document.getElementById("loginBox").style.display = "none";
+
+        document.getElementById("mainContent").style.display = "block";
+
+    } else {
+
+        document.getElementById("errorMessage")
+            .innerText = "Incorrect Password";
+
+    }
+
+}
+
+// ADD UNIFORM
+function addUniform(){
+
+    const name =
+        document.getElementById("uniformName").value.trim();
+
+    const uniformNumber =
+        document.getElementById("uniformNumber").value.trim();
+
+    const jacketNumber =
+        document.getElementById("jacketNumber").value.trim();
+
+    const bibberNumber =
+        document.getElementById("bibberNumber").value.trim();
+
+    if(name === "" || uniformNumber === ""){
+
+        alert("Please complete all required fields.");
+
+        return;
+
+    }
+
+    const uniform = {
+
+        id: Date.now(),
+
+        name,
+
+        uniformNumber,
+
+        jacketNumber,
+
+        bibberNumber
+
+    };
+
+    uniforms.push(uniform);
+
+    saveUniforms();
+
+    renderUniforms(uniforms);
+
+    // CLEAR INPUTS
+    document.getElementById("uniformName").value = "";
+    document.getElementById("uniformNumber").value = "";
+    document.getElementById("jacketNumber").value = "";
+    document.getElementById("bibberNumber").value = "";
+
+}
+
+// RENDER
+function renderUniforms(data){
+
+    const container =
+        document.getElementById("uniformContainer");
+
+    container.innerHTML = "";
+
+    if(data.length === 0){
+
+        container.innerHTML =
+            "<p>No uniforms found.</p>";
+
+        return;
+
+    }
+
+    data.forEach(uniform => {
+
+        const card =
+            document.createElement("div");
+
+        card.classList.add("uniform-card");
+
+        card.innerHTML = `
+
+            <h3>${uniform.name}</h3>
+
+            <p>
+                <strong>Uniform Number:</strong>
+                ${uniform.uniformNumber}
+            </p>
+
+            <div class="grid">
+
+                <div class="mini-box">
+
+                    <strong>Jacket Number</strong>
+
+                    <p>${uniform.jacketNumber}</p>
+
+                </div>
+
+                <div class="mini-box">
+
+                    <strong>Bibber Number</strong>
+
+                    <p>${uniform.bibberNumber}</p>
+
+                </div>
+
+            </div>
+
+            <button
+                class="delete-btn"
+                onclick="deleteUniform(${uniform.id})"
+            >
+                Delete Uniform
+            </button>
+
+        `;
+
+        container.appendChild(card);
+
+    });
+
+}
+
+// SEARCH
+function searchUniforms(){
+
+    const searchValue =
+        document.getElementById("searchInput")
+        .value
+        .toLowerCase();
+
+    const filteredUniforms = uniforms.filter(uniform =>
+
+        uniform.name.toLowerCase().includes(searchValue)
+
+        ||
+
+        uniform.uniformNumber.toLowerCase().includes(searchValue)
+
+        ||
+
+        uniform.jacketNumber.toLowerCase().includes(searchValue)
+
+        ||
+
+        uniform.bibberNumber.toLowerCase().includes(searchValue)
+
+    );
+
+    renderUniforms(filteredUniforms);
+
+}
+
+// DELETE
+function deleteUniform(id){
+
+    uniforms = uniforms.filter(
+        uniform => uniform.id !== id
+    );
+
+    saveUniforms();
+
+    renderUniforms(uniforms);
+
+}
+
+// SAVE
+function saveUniforms(){
+
+    localStorage.setItem(
+        "crestviewUniforms",
+        JSON.stringify(uniforms)
+    );
+
+}
+
+// LOAD
+function loadUniforms(){
+
+    const savedUniforms =
+        localStorage.getItem("crestviewUniforms");
+
+    if(savedUniforms){
+
+        uniforms = JSON.parse(savedUniforms);
+
+        renderUniforms(uniforms);
+
+    }
+
+}
+
+// INITIAL LOAD
+loadUniforms();
+
+</script>
+
+</body>
+</html>
