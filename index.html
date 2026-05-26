@@ -215,7 +215,12 @@ button{
             <button onclick="addUniform()">
                 Add Uniform
             </button>
-
+            <button
+    class="delete-btn"
+    onclick="deleteAllUniforms()"
+>
+    Delete ALL Uniforms
+</button>
         </div>
 
         <div class="box">
@@ -250,7 +255,8 @@ import {
     addDoc,
     onSnapshot,
     deleteDoc,
-    doc
+    doc,
+    getDocs
 }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
@@ -478,7 +484,89 @@ window.deleteUniform = async function(id){
     await deleteDoc(doc(db, "uniforms", id));
 
 }
+/* DELETE ALL UNIFORMS */
 
+window.deleteAllUniforms = async function(){
+
+    // FIRST VERIFICATION
+    const passwordCheck = prompt(
+        "WARNING: This will delete ALL uniforms.\n\nEnter the website password to continue."
+    );
+
+    if(passwordCheck !== websitePassword){
+
+        alert("Incorrect password.");
+
+        return;
+
+    }
+
+    // SECOND VERIFICATION
+    const confirmCheck = prompt(
+        'Type "confirm" to continue.'
+    );
+
+    if(confirmCheck !== "confirm"){
+
+        alert("Verification failed.");
+
+        return;
+
+    }
+
+    // THIRD VERIFICATION
+    const newYearCheck = prompt(
+        'FINAL WARNING:\n\nType "new year" to permanently delete ALL uniforms.'
+    );
+
+    if(newYearCheck !== "new year"){
+
+        alert("Final verification failed.");
+
+        return;
+
+    }
+
+    // FINAL POPUP
+    const finalDecision = confirm(
+        "LAST WARNING:\n\nThis action CANNOT be undone.\n\nDelete ALL uniforms?"
+    );
+
+    if(!finalDecision){
+
+        return;
+
+    }
+
+    try{
+
+        // GET EVERY DOCUMENT
+        const snapshot =
+            await getDocs(uniformsCollection);
+
+        // DELETE EACH ONE
+        const deletePromises =
+            snapshot.docs.map(docItem =>
+
+                deleteDoc(
+                    doc(db, "uniforms", docItem.id)
+                )
+
+            );
+
+        await Promise.all(deletePromises);
+
+        alert("All uniforms deleted.");
+
+    } catch(error){
+
+        console.error(error);
+
+        alert("Error deleting uniforms.");
+
+    }
+
+}
 </script>
 
 </body>
