@@ -497,7 +497,7 @@ window.deleteUniform = async function(id){
 
 }
 
-/* EDIT */
+/* EDIT UNIFORM */
 
 window.editUniform = async function(id){
 
@@ -534,15 +534,27 @@ window.editUniform = async function(id){
 
     if(newBibberNumber === null) return;
 
-    await updateDoc(
-        doc(db, "uniforms", id),
-        {
-            name: newName,
-            uniformNumber: newUniformNumber,
-            jacketNumber: newJacketNumber,
-            bibberNumber: newBibberNumber
-        }
-    );
+    try{
+
+        await updateDoc(
+            doc(db, "uniforms", id),
+            {
+                name: newName,
+                uniformNumber: newUniformNumber,
+                jacketNumber: newJacketNumber,
+                bibberNumber: newBibberNumber
+            }
+        );
+
+        alert("Uniform updated.");
+
+    } catch(error){
+
+        console.error(error);
+
+        alert("Error updating uniform.");
+
+    }
 
 }
 /* DELETE ALL UNIFORMS */
