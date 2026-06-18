@@ -213,8 +213,15 @@ button{
             </div>
 
             <button onclick="addUniform()">
-                Add Uniform
-            </button>
+    Add Uniform
+</button>
+
+<button
+    class="delete-btn"
+    onclick="deleteAllUniforms()"
+>
+    Delete ALL Uniforms
+</button>
           
         </div>
 
@@ -358,7 +365,10 @@ window.addUniform = async function(){
         bibberNumber
 
     });
-
+document.getElementById("uniformName").value = "";
+document.getElementById("uniformNumber").value = "";
+document.getElementById("jacketNumber").value = "";
+document.getElementById("bibberNumber").value = "";
 }
 
 /* LIVE DATABASE */
