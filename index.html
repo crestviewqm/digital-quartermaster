@@ -215,12 +215,23 @@ button{
             <button onclick="addUniform()">
                 Add Uniform
             </button>
-            <button
-    class="delete-btn"
-    onclick="deleteAllUniforms()"
->
-    Delete ALL Uniforms
-</button>
+            <div style="display:flex;gap:10px;margin-top:15px;">
+
+    <button
+        onclick="editUniform('${uniform.id}')"
+        style="background:#2563eb;color:white;"
+    >
+        Edit Uniform
+    </button>
+
+    <button
+        class="delete-btn"
+        onclick="deleteUniform('${uniform.id}')"
+    >
+        Delete Uniform
+    </button>
+
+</div>
         </div>
 
         <div class="box">
@@ -256,7 +267,8 @@ import {
     onSnapshot,
     deleteDoc,
     doc,
-    getDocs
+    getDocs,
+    updateDoc
 }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
@@ -482,6 +494,55 @@ window.searchUniforms = function(){
 window.deleteUniform = async function(id){
 
     await deleteDoc(doc(db, "uniforms", id));
+
+}
+
+/* EDIT */
+
+window.editUniform = async function(id){
+
+    const uniform =
+        allUniforms.find(u => u.id === id);
+
+    if(!uniform) return;
+
+    const newName = prompt(
+        "Student Name:",
+        uniform.name
+    );
+
+    if(newName === null) return;
+
+    const newUniformNumber = prompt(
+        "Uniform Number:",
+        uniform.uniformNumber
+    );
+
+    if(newUniformNumber === null) return;
+
+    const newJacketNumber = prompt(
+        "Jacket Number:",
+        uniform.jacketNumber
+    );
+
+    if(newJacketNumber === null) return;
+
+    const newBibberNumber = prompt(
+        "Bibber Number:",
+        uniform.bibberNumber
+    );
+
+    if(newBibberNumber === null) return;
+
+    await updateDoc(
+        doc(db, "uniforms", id),
+        {
+            name: newName,
+            uniformNumber: newUniformNumber,
+            jacketNumber: newJacketNumber,
+            bibberNumber: newBibberNumber
+        }
+    );
 
 }
 /* DELETE ALL UNIFORMS */
