@@ -215,23 +215,7 @@ button{
             <button onclick="addUniform()">
                 Add Uniform
             </button>
-            <div style="display:flex;gap:10px;margin-top:15px;">
-
-    <button
-        onclick="editUniform('${uniform.id}')"
-        style="background:#2563eb;color:white;"
-    >
-        Edit Uniform
-    </button>
-
-    <button
-        class="delete-btn"
-        onclick="deleteUniform('${uniform.id}')"
-    >
-        Delete Uniform
-    </button>
-
-</div>
+          
         </div>
 
         <div class="box">
@@ -443,14 +427,28 @@ function renderUniforms(data){
 
             </div>
 
-            <button
-                class="delete-btn"
-                onclick="deleteUniform('${uniform.id}')"
-            >
-                Delete Uniform
-            </button>
+            <div style="display:flex;gap:10px;margin-top:15px;">
 
-        </div>
+    <button
+        onclick="editUniform('${uniform.id}')"
+        style="
+            background:#2563eb;
+            color:white;
+            flex:1;
+        "
+    >
+        Edit Uniform
+    </button>
+
+    <button
+        class="delete-btn"
+        onclick="deleteUniform('${uniform.id}')"
+        style="flex:1;"
+    >
+        Delete Uniform
+    </button>
+
+</div>
 
         `;
 
