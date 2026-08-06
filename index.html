@@ -720,10 +720,14 @@ window.importSpreadsheet = function(event){
             const columns = rows[i].split(",");
 
             const lastName = columns[0]?.trim() || "";
-            const firstName = columns[1]?.trim() || "";
-            const instrument = columns[2]?.trim() || "";
-            const bibberNumber = columns[3]?.trim() || "";
-            const jacketNumber = columns[4]?.trim() || "";
+const firstName = columns[1]?.trim() || "";
+const instrument = columns[2]?.trim() || "";
+
+// Skip Grade (column 3)
+// Skip Class (column 4)
+
+const jacketNumber = columns[5]?.trim() || "";
+const bibberNumber = columns[6]?.trim() || "";
 
             const fullName = firstName + " " + lastName;
 
