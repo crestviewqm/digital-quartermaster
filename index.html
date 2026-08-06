@@ -181,6 +181,18 @@ button{
             >
 
             <input
+    type="text"
+    id="instrument"
+    placeholder="Instrument"
+>
+
+<input
+    type="text"
+    id="hatNumber"
+    placeholder="Hat Number"
+>
+
+            <input
                 type="text"
                 id="uniformNumber"
                 placeholder="Uniform Number"
@@ -215,7 +227,17 @@ button{
             <button onclick="addUniform()">
     Add Uniform
 </button>
+<button onclick="document.getElementById('importFile').click()">
+    Import Spreadsheet
+</button>
 
+<input
+    type="file"
+    id="importFile"
+    accept=".csv"
+    style="display:none"
+    onchange="importSpreadsheet(event)"
+/>
 <button
     class="delete-btn"
     onclick="deleteAllUniforms()"
@@ -340,6 +362,12 @@ window.addUniform = async function(){
     const name =
         document.getElementById("uniformName").value;
 
+const instrument =
+    document.getElementById("instrument").value;
+
+const hatNumber =
+    document.getElementById("hatNumber").value;
+   
     const uniformNumber =
         document.getElementById("uniformNumber").value;
 
@@ -359,12 +387,14 @@ window.addUniform = async function(){
 
     await addDoc(uniformsCollection, {
 
-        name,
-        uniformNumber,
-        jacketNumber,
-        bibberNumber
+    name,
+    instrument,
+    hatNumber,
+    uniformNumber,
+    jacketNumber,
+    bibberNumber
 
-    });
+});
 document.getElementById("uniformName").value = "";
 document.getElementById("uniformNumber").value = "";
 document.getElementById("jacketNumber").value = "";
@@ -411,7 +441,15 @@ function renderUniforms(data){
         <div class="uniform-card">
 
             <h3>${uniform.name}</h3>
+<p>
+    <strong>Instrument:</strong>
+    ${uniform.instrument || "Not Assigned"}
+</p>
 
+<p>
+    <strong>Hat Number:</strong>
+    ${uniform.hatNumber || "Not Assigned"}
+</p>
             <p>
                 <strong>Uniform Number:</strong>
                 ${uniform.uniformNumber}
@@ -477,21 +515,29 @@ window.searchUniforms = function(){
 
     const filtered = allUniforms.filter(uniform =>
 
-        uniform.name.toLowerCase().includes(value)
+    uniform.name.toLowerCase().includes(value)
 
-        ||
+    ||
 
-        uniform.uniformNumber.toLowerCase().includes(value)
+    uniform.instrument?.toLowerCase().includes(value)
 
-        ||
+    ||
 
-        uniform.jacketNumber.toLowerCase().includes(value)
+    uniform.hatNumber?.toLowerCase().includes(value)
 
-        ||
+    ||
 
-        uniform.bibberNumber.toLowerCase().includes(value)
+    uniform.uniformNumber.toLowerCase().includes(value)
 
-    );
+    ||
+
+    uniform.jacketNumber.toLowerCase().includes(value)
+
+    ||
+
+    uniform.bibberNumber.toLowerCase().includes(value)
+
+);
 
     renderUniforms(filtered);
 
@@ -648,6 +694,48 @@ window.deleteAllUniforms = async function(){
     }
 
 }
+window.importSpreadsheet = async function(event){
+
+    const file = event.target.files[0];
+
+    if(!file){
+        return;
+    }
+
+    const text = await file.text();
+
+    const rows = text.split("\n");
+
+    rows.shift();
+
+    let importedCount = 0;
+
+    for(const row of rows){
+
+        if(row.trim() === "") continue;
+
+        const columns = row.split(",");
+
+        await addDoc(uniformsCollection,{
+
+            name: columns[0]?.trim() || "",
+            instrument: columns[1]?.trim() || "",
+            hatNumber: columns[2]?.trim() || "",
+            uniformNumber: columns[3]?.trim() || "",
+            jacketNumber: columns[4]?.trim() || "",
+            bibberNumber: columns[5]?.trim() || ""
+
+        });
+
+        importedCount++;
+
+    }
+
+    alert(`Imported ${importedCount} uniforms successfully.`);
+
+    event.target.value = "";
+
+};
 </script>
 
 </body>
