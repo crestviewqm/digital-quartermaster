@@ -237,7 +237,7 @@ button{
     accept=".csv"
     style="display:none"
     onchange="importSpreadsheet(event)"
-/>
+>
 <button
     class="delete-btn"
     onclick="deleteAllUniforms()"
@@ -694,7 +694,7 @@ window.deleteAllUniforms = async function(){
     }
 
 }
-window.importSpreadsheet = async function(event){
+window.importSpreadsheet = function(event){
 
     const file = event.target.files[0];
 
@@ -702,40 +702,51 @@ window.importSpreadsheet = async function(event){
         return;
     }
 
-    const text = await file.text();
+    const reader = new FileReader();
 
-    const rows = text.split("\n");
+    reader.onload = async function(e){
 
-    rows.shift();
+        const text = e.target.result;
 
-    let importedCount = 0;
+        const rows = text.split(/\r?\n/);
 
-    for(const row of rows){
+        // Skip the header row
+        for(let i = 1; i < rows.length; i++){
 
-        if(row.trim() === "") continue;
+            if(rows[i].trim() === ""){
+                continue;
+            }
 
-        const columns = row.split(",");
+            const columns = rows[i].split(",");
 
-        await addDoc(uniformsCollection,{
+            const lastName = columns[0]?.trim() || "";
+            const firstName = columns[1]?.trim() || "";
+            const instrument = columns[2]?.trim() || "";
+            const bibberNumber = columns[3]?.trim() || "";
+            const jacketNumber = columns[4]?.trim() || "";
 
-            name: columns[0]?.trim() || "",
-            instrument: columns[1]?.trim() || "",
-            hatNumber: columns[2]?.trim() || "",
-            uniformNumber: columns[3]?.trim() || "",
-            jacketNumber: columns[4]?.trim() || "",
-            bibberNumber: columns[5]?.trim() || ""
+            const fullName = firstName + " " + lastName;
 
-        });
+            await addDoc(uniformsCollection,{
 
-        importedCount++;
+                name: fullName,
+                instrument: instrument,
+                hatNumber: "",
+                uniformNumber: "",
+                jacketNumber: jacketNumber,
+                bibberNumber: bibberNumber
 
-    }
+            });
 
-    alert(`Imported ${importedCount} uniforms successfully.`);
+        }
 
-    event.target.value = "";
+        alert("Spreadsheet imported successfully!");
 
-};
+    };
+
+    reader.readAsText(file);
+
+}
 </script>
 
 </body>
